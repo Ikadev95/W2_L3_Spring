@@ -6,15 +6,18 @@ import com.epicode.W2_L2_Spring.autore.AutoreRepo;
 import com.epicode.W2_L2_Spring.autore.AutoreSrv;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
+@Validated
 public class BlogSrv {
     @Autowired
     private BlogRepo blogRepo;
@@ -36,7 +39,7 @@ public class BlogSrv {
         return blogRepo.findById(id).get();
     };
 
-    public Blog saveBlog(BlogCreaRequest a){
+    public Blog saveBlog(@Valid BlogCreaRequest a){
         if(blogRepo.existsByTitolo(a.getTitolo())){
             throw new EntityExistsException("un blog con questo titolo esiste già");
         }

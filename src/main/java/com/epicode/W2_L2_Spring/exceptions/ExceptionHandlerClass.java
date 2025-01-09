@@ -19,8 +19,8 @@ public class ExceptionHandlerClass extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("Error: "+ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = EntityNotFoundException.class)
-    protected ResponseEntity<Object> entityNotFound(EntityExistsException ex) {
+    @ExceptionHandler(value = EntityExistsException.class)
+    protected ResponseEntity<Object> entityAlreadyExists(EntityExistsException ex) {
         return new ResponseEntity<>("Error: "+ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
