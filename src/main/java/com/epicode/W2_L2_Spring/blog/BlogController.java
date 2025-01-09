@@ -17,11 +17,12 @@ public class BlogController {
     @Autowired
     private BlogSrv blogSrv;
 
+    @GetMapping
     public ResponseEntity<Page<Blog>> findAll(Pageable pageable) {
         return ResponseEntity.ok(blogSrv.findAll(pageable));
     }
 
-    @GetMapping
+
     public ResponseEntity<List<Blog>> listAllBlogs(){
         List<Blog> blogs = blogSrv.findAll();
         return ResponseEntity.ok(blogs);
