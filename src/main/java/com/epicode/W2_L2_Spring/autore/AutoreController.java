@@ -24,39 +24,28 @@ public class AutoreController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
-        try{
             return ResponseEntity.ok(autoreSrv.findById(id));
-        } catch (EntityExistsException e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @PostMapping
     public ResponseEntity<?> saveAutore(@RequestBody AutoreCreaRequest request ) {
-        try{
             return new ResponseEntity<>(autoreSrv.saveAutore(request), HttpStatus.CREATED);
-        } catch (EntityExistsException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
 
-        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> modifyAutore(@PathVariable Long id, @RequestBody Autore modAutore) {
-        try{
+
             return ResponseEntity.ok(autoreSrv.modifyAutore(id, modAutore));
-        } catch(EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @DeleteMapping ("/{id}")
     public ResponseEntity<?> deleteAutore(@PathVariable Long id){
-        try{
+
             return new ResponseEntity<>("blog cancellato", HttpStatus.NO_CONTENT);
-        } catch(EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
     }
 
 }

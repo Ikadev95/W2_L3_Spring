@@ -1,4 +1,5 @@
 package com.epicode.W2_L2_Spring.exceptions;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -16,6 +17,11 @@ public class ExceptionHandlerClass extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = EntityNotFoundException.class)
     protected ResponseEntity<Object> entityNotFound(EntityNotFoundException ex) {
         return new ResponseEntity<>("Error: "+ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    protected ResponseEntity<Object> entityNotFound(EntityExistsException ex) {
+        return new ResponseEntity<>("Error: "+ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

@@ -1,6 +1,7 @@
 package com.epicode.W2_L2_Spring.autore;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class AutoreSrv {
 
     public Autore findById(Long id){
         if(!autoreRepo.existsById(id)){
-            throw new EntityExistsException("l'autore non è stato trovato");
+            throw new EntityNotFoundException("l'autore non è stato trovato");
         }
 
         return autoreRepo.findById(id).get();
@@ -25,7 +26,7 @@ public class AutoreSrv {
 
     public Autore findByEmail(String mail){
         if(!autoreRepo.existsByEmail(mail)){
-            throw new EntityExistsException("l'autore non è stato trovato");
+            throw new EntityNotFoundException("l'autore non è stato trovato");
         }
 
         return autoreRepo.findByEmail(mail);
